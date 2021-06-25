@@ -1,0 +1,14 @@
+* {
+    border:1px solid red;
+    text-align: center;
+}
+
+/*TODO: .start class will do initial styling for start page */
+
+/*TODO: .quiz-play class will change things after quiz has begun, hiding the greeting message, start button etc. */
+
+/*TODO: .game-over will change styling to similar to start but have content of game over with score and the option to try again */
+
+/* TODO: hover effect on responses and buttons */
+
+/* TODO: Scoreboard styling */
