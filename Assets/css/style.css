@@ -1,14 +1,73 @@
 * {
-    border:1px solid red;
     text-align: center;
 }
 
 /*TODO: .start class will do initial styling for start page */
+.start #scoreboard,
+.start #question-card,
+.start header {
+    visibility: hidden;
+}
 
-/*TODO: .quiz-play class will change things after quiz has begun, hiding the greeting message, start button etc. */
+.start #btn:hover {
+    transform:scale(1.02);
+    box-shadow: 1px 1px 1px;
+}
 
-/*TODO: .game-over will change styling to similar to start but have content of game over with score and the option to try again */
+/*TODO: .game-start class will change things after quiz has begun, hiding the greeting message, start button etc. */
 
-/* TODO: hover effect on responses and buttons */
+.game-start h1,
+.game-start p,
+.game-start #rule,
+.game-start #btn {
+    visibility: hidden;
+}
 
-/* TODO: Scoreboard styling */
+.game-start #scoreboard p {
+    visibility: visible;
+}
+/* Showing our question template */
+.game-start #question-card {
+    visibility: visible;
+    border: 1px solid black;
+    box-shadow: 5px 5px 4px -1px #000000;
+    width: 50vw;
+    height: 25vh;
+    margin: 0 auto;
+}
+
+.game-start #question-card h3 {
+    text-align: start;
+    margin-left: 0.5em;
+    border-bottom: 0.3em solid grey;
+}
+
+.game-start #question-card form{
+    display:flex;
+    flex-direction: column;
+}
+
+.game-start #question-card input {
+    visibility: hidden;
+}
+
+
+.game-start #question-card div {
+    margin: 0.6em 0;
+}
+
+.game-start input[type="radio"]:checked+label {
+    font-weight:bolder;
+}
+
+.game-start #nextQ {
+    margin: 1em 0 0 1.5em;
+}
+
+.game-over h1,
+.game-over p,
+.game-over #rule,
+.game-over #btn,
+.game-over #question-card {
+    visibility: hidden;
+}
