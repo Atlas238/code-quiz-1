@@ -21,9 +21,15 @@
             <form id = "responses"></form>
             <button id = "nextQ">Next Question</button>
         </div>
-        <div id="scoreboard">
+        <div id="current-score">
             <p>Wins: <span id="wins"></span></p>
             <p>Losses: <span id="losses"></span></p>
+            <input type="text" name="initals" id="userInitials">
+            <input id="scoreboardAdd" type="button" value="Add to the scoreboard!">
+            <input id="showScores" type="button" value="Show standings">
+        </div>
+        <div id="scoreboard">
+            <ol id="user-scores"></ol>
         </div>
     </main>
     <script src = "Assets/js/script.js"></script>

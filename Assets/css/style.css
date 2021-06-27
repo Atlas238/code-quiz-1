@@ -2,9 +2,10 @@
     text-align: center;
 }
 
-/*TODO: .start class will do initial styling for start page */
-.start #scoreboard,
+/* .start class will do initial styling for start page */ 
 .start #question-card,
+.start #userInitials,
+.start #current-score,
 .start header {
     visibility: hidden;
 }
@@ -14,25 +15,29 @@
     box-shadow: 1px 1px 1px;
 }
 
-/*TODO: .game-start class will change things after quiz has begun, hiding the greeting message, start button etc. */
-
 .game-start h1,
 .game-start p,
+.game-start #userInitials,
 .game-start #rule,
-.game-start #btn {
+.game-start #btn,
+.game-start #scoreboardAdd,
+.game-start #showScores {
     visibility: hidden;
 }
 
-.game-start #scoreboard p {
+.game-start #current-score p {
     visibility: visible;
 }
+
+
 /* Showing our question template */
 .game-start #question-card {
     visibility: visible;
     border: 1px solid black;
     box-shadow: 5px 5px 4px -1px #000000;
     width: 50vw;
-    height: 25vh;
+    height: 35vh;
+    min-height:fit-content;
     margin: 0 auto;
 }
 
@@ -47,7 +52,8 @@
     flex-direction: column;
 }
 
-.game-start #question-card input {
+.game-start #question-card input,
+.game-start #userinitials {
     visibility: hidden;
 }
 
@@ -70,4 +76,21 @@
 .game-over #btn,
 .game-over #question-card {
     visibility: hidden;
+}
+
+.scoreboardView h1,
+.scoreboardView p,
+.scoreboardView #rule,
+.scoreboardView #btn,
+.scoreboardView #question-card {
+    visibility: hidden;
+}
+
+.scoreboardView h1,
+.scoreboardView p {
+    visibility: hidden;
+}
+
+.scoreboardView #scoreboard {
+    visibility: visible;
 }

@@ -1,7 +1,6 @@
-// Setting up variables for HTML Elements I will be manipulating per question
-// mainEl is our entire scene, want to use this to change mainEl class to quizStart to change layout and transition to quiz question format
+// Variable declaration, need question info to be global as well as our main element selectors and our end stats
 var mainEl = document.querySelector("main");
-// Our card itself, this way we can change the content by calling the whole object, and be specific with .children[] to target the actual question portion and the list of responses
+
 var questionCardEl = document.querySelector(".question-card");
 
 var timer = document.querySelector("#timeRemaining");
@@ -138,12 +137,12 @@ function startGame() {
     mainEl.className = "game-start";
     questionNumber = 0;
     // Start timer (1 minute), rounding from miliseconds to seconds for readability, seems slow but pretty sure thats 1 min...
-var timeLeft = 6000;
+var time = 6000;
 
 var timeRemaining = setInterval(function () {
-    timeLeft --;
-    timer.textContent = Math.floor((timeLeft / 100));
-        if (timeLeft <= 0) {
+    time --;
+    timer.textContent = Math.floor((time / 100));
+        if (time <= 0) {
             clearInterval(timeRemaining);
             timer.textContent = "Game Over!"
             gameOver();
@@ -155,9 +154,8 @@ var winCount = document.getElementById("wins");
 
 var lossesCount = document.getElementById("losses");
     lossesCount.textContent = losses;
-
-    // Sets the questions elements in place 
-    // Making boxes for formatting
+ 
+// Adding in HTML Elements to fill with question info
     var userChoice1 = document.createElement("div");
         userChoice1.setAttribute("id", "1");
         document.getElementById("responses").appendChild(userChoice1);
@@ -214,6 +212,7 @@ var lossesCount = document.getElementById("losses");
             labelCheckboxD.setAttribute("for", "choice4");
             document.getElementById("4").appendChild(labelCheckboxD);
 
+// Fills elements with info from index'd questions
             function fillQuestions() {
                 // Fills question h3 based on question number
                 document.getElementById("question").textContent = (questionArr[questionNumber].question);
@@ -238,23 +237,28 @@ var lossesCount = document.getElementById("losses");
         c: (questionArr[questionNumber].responseC),
         d: (questionArr[questionNumber].responseD)
     }
-    
-    document.getElementById("nextQ").addEventListener("click", function() {
-        for (let i = 0; i < inputArr.length; i++) {
-            if (inputArr[i].checked) {
-                if ()
-            
-            }
-        }
-    });
-
-
-
+    // Verification is broken right now, need to try logging the questionArr[questionNumber].correctAns.value 
         }
 
 // Show user score, allow initials input, log as an object to localStorage to then pull down for scoreboard
 function gameOver() {
     mainEl.className = "game-over";
-    timeLeft = 0
+    var initials = document.getElementById("userInitials").nodeValue;
+// When this is clicked, store the input field and wins value as ScoreStore, convert it to a string and then stores them in local storage
+    document.getElementById("scoreboardAdd").addEventListener("click", function() {
+        var scoreStore = {
+            initials: initials,
+            score: wins
+        }
 
-};
+        localStorage.setItem(JSON.stringify(scoreStore));
+
+        mainEl.className = "scoreboardView";
+    });
+
+    document.getElementById("showScores").addEventListener("click", function() {
+        mainEl.className = "scoreboardView";
+        // create score board list, populate list with key pairs stored in local storage
+        
+    });
+}
