@@ -3,11 +3,30 @@
 }
 
 /* .start class will do initial styling for start page */ 
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(11deg, rgba(2,0,36,1) 0%, rgba(20,20,22,1) 31%, rgba(0,212,255,1) 100%);
+}
+
+body {
+    width:100vw;
+    height:100vh;
+}
+
+.countdown {
+    color:whitesmoke;
+    font-size:1.5rem;
+}
+
 .start #question-card,
 .start #userInitials,
 .start #current-score,
 .start header {
     visibility: hidden;
+}
+
+.start h1, p {
+    color:whitesmoke;
 }
 
 .start #btn:hover {
@@ -27,23 +46,36 @@
 
 .game-start #current-score p {
     visibility: visible;
+    color:whitesmoke;
+    padding-left: 1.2rem;
 }
 
-
 /* Showing our question template */
+.game-start {
+    background: rgb(2,0,36);
+    background: linear-gradient(11deg, rgba(2,0,36,1) 0%, rgba(20,20,22,1) 31%, rgba(0,212,255,1) 100%);
+}
+
+.game-start {
+    width:100vw;
+    height:100vh;
+}
+
 .game-start #question-card {
     visibility: visible;
+    background-color: whitesmoke;
     border: 1px solid black;
     box-shadow: 5px 5px 4px -1px #000000;
     width: 50vw;
+    max-width: fit-content;
     height: 35vh;
-    min-height:fit-content;
+    min-height:40vh;
     margin: 0 auto;
 }
 
 .game-start #question-card h3 {
     text-align: start;
-    margin-left: 0.5em;
+    margin: 1em 0.5em;
     border-bottom: 0.3em solid grey;
 }
 
@@ -75,7 +107,20 @@
 .game-over #rule,
 .game-over #btn,
 .game-over #question-card {
+    display:none;
     visibility: hidden;
+}
+
+.game-over #current-score {
+    display: flex;
+    flex-direction: column;
+    margin-left:37%;
+    width: 25vw;
+}
+
+.game-over input {
+    margin: 1rem 0;
+    justify-self: center;
 }
 
 .scoreboardView h1,
@@ -83,14 +128,31 @@
 .scoreboardView #rule,
 .scoreboardView #btn,
 .scoreboardView #question-card {
+    display:none;
     visibility: hidden;
 }
 
 .scoreboardView h1,
-.scoreboardView p {
+.scoreboardView p,
+.scoreboardView #userInitials,
+.scoreboardView #scoreboardAdd,
+.scoreboardView #showScores {
     visibility: hidden;
 }
 
-.scoreboardView #scoreboard {
+.scoreboardView #scoreboard,
+.scoreboardView #thanks {
     visibility: visible;
+}
+
+.scoreboardView #scoreboard {
+    color:whitesmoke;
+    display:flex;
+    margin-left:37%;
+    max-width: 50vw;
+}
+
+.scoreboardView #user-scores {
+    text-align: center;
+    flex-direction: column;
 }
