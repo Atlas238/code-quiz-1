@@ -73,6 +73,10 @@ body {
     margin: 0 auto;
 }
 
+.game-start #btn2 {
+    visibility: hidden;
+}
+
 .game-start #question-card h3 {
     text-align: start;
     margin: 1em 0.5em;
@@ -106,7 +110,8 @@ body {
 .game-over p,
 .game-over #rule,
 .game-over #btn,
-.game-over #question-card {
+.game-over #question-card,
+.game-over #btn2 {
     display:none;
     visibility: hidden;
 }
@@ -127,7 +132,8 @@ body {
 .scoreboardView p,
 .scoreboardView #rule,
 .scoreboardView #btn,
-.scoreboardView #question-card {
+.scoreboardView #question-card,
+.scoreboardView #btn2 {
     display:none;
     visibility: hidden;
 }

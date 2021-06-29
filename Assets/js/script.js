@@ -1,4 +1,3 @@
-// Variable declaration, need question info to be global as well as our main element selectors and our end stats
 var mainEl = document.querySelector("main");
 
 var questionCardEl = document.querySelector(".question-card");
@@ -6,6 +5,8 @@ var questionCardEl = document.querySelector(".question-card");
 var timer = document.querySelector("#timeRemaining");
 
 var button = document.querySelector("#btn");
+
+var button2 = document.querySelector("#btn2");
 
 var rules = document.querySelector("#rule");
 
@@ -15,7 +16,6 @@ var wins = 0;
 
 var losses = 0;
 
-// Setting up objects to contain the question and response content...
 let questionOne = {
   question: "In HTML, what is the proper name for a <tag>?",
 
@@ -116,8 +116,16 @@ var questionArr = [
   questionSix,
 ];
 
+var tracker = 0;
 // Listening for click...
 button.addEventListener("click", startGame);
+
+button2.addEventListener(`click`, function () {
+  tracker++;
+  gameOver();
+});
+
+var timeRemaining;
 
 function startGame() {
   // Firt thing, class of main changes to game-start to hide the starter page items and display the question card
@@ -126,7 +134,7 @@ function startGame() {
   // Start timer (1 minute), rounding from miliseconds to seconds for readability, seems slow but pretty sure thats 1 min...
   var time = 6000;
 
-  var timeRemaining = setInterval(function () {
+  timeRemaining = setInterval(function () {
     time--;
     timer.textContent = Math.floor(time / 100);
     if (time <= 0) {
@@ -211,9 +219,9 @@ function startGame() {
   }
 
   fillQuestions();
-  // Creating array of checkboxes to see which index is checked
+
   var inputArr = [checkBoxA, checkBoxB, checkBoxC, checkBoxD];
-  // Listening on the next question button, start checking per response if a response is checked, if so check the index of the response against the index of our correct answer, if they are the same award a point, advance to the next question and fill the card with the next questions info, if not, award a loss, advance and fill as well as subtract from overall time. If the question is the final question, go to game over and ask user to log their score!
+
   document.getElementById("nextQ").addEventListener("click", function () {
     for (let i = 0; i < inputArr.length; i++) {
       if (inputArr[i].checked) {
@@ -246,39 +254,108 @@ function startGame() {
   });
 }
 
-// Show user score, allow initials input, log as an object to localStorage to then pull down for scoreboard
 function gameOver() {
   mainEl.className = "game-over";
   window.clearInterval(timeRemaining);
-  timeRemaining = null;
-  time = 0;
+
   timer.textContent = "Game Over!";
-  // When this is clicked, store the input field and wins value as ScoreStore, convert it to a string and then stores them in local storage
-  let x = 0;
-  if (x === 0) {
+
+  if (tracker == 0) {
+    let x = 0;
+    if (x === 0) {
+      document
+        .getElementById("scoreboardAdd")
+        .addEventListener("click", function () {
+          var initials = document.getElementById("userInitials").value;
+          var scoreStore = {
+            winNum: wins,
+            lossesNum: losses,
+          };
+          if (initials.length < 0) {
+            alert(
+              "You must write something for your initials - but you dont have to save your score!"
+            );
+          } else {
+            var scoreStoreString = JSON.stringify(scoreStore);
+            localStorage.setItem(initials, scoreStoreString);
+            document.getElementById("userInitials").textContent = "Thank you!";
+            x++;
+          }
+        });
+    }
     document
-      .getElementById("scoreboardAdd")
+      .getElementById("showScores")
       .addEventListener("click", function () {
-        var initials = document.getElementById("userInitials").value;
-        var scoreStore = {
-          winNum: wins,
-          lossesNum: losses,
-        };
-        if (initials.length < 0) {
-          alert(
-            "You must write something for your initials - but you dont have to save your score!"
+        mainEl.className = "scoreboardView";
+        // Creating li elements in user-scores
+        var scoreli1 = document.createElement("li");
+        document.getElementById("user-scores").appendChild(scoreli1);
+        var scoreli2 = document.createElement("li");
+        document.getElementById("user-scores").appendChild(scoreli2);
+        var scoreli3 = document.createElement("li");
+        document.getElementById("user-scores").appendChild(scoreli3);
+        var scoreli4 = document.createElement("li");
+        document.getElementById("user-scores").appendChild(scoreli4);
+        var scoreli5 = document.createElement("li");
+        document.getElementById("user-scores").appendChild(scoreli5);
+
+        // Pulling things from storage and making them usable
+        // start with empty array, push new user scores into array
+        let localStorageStrings = [];
+        let localStorageParsed = [];
+        let localStorageKeyArr = [];
+
+        function pullScores() {
+          for (let i = 0; i < localStorage.length; i++) {
+            localStorageKeyArr.push(localStorage.key(i));
+          }
+
+          for (let i = 0; i < localStorageKeyArr.length; i++) {
+            localStorageStrings.push(
+              localStorage.getItem(localStorageKeyArr[i])
+            );
+          }
+
+          for (let i = 0; i < localStorageStrings.length; i++) {
+            var thisObj = JSON.parse(localStorageStrings[i]);
+            thisObj.name = localStorageKeyArr[i];
+            localStorageParsed.push(thisObj);
+          }
+        }
+
+        pullScores();
+        fillScores();
+
+        function fillScores() {
+          var localStorageSorted = localStorageParsed.sort((a, b) =>
+            a.winNum > b.winNum ? 1 : -1
           );
-        } else {
-          var scoreStoreString = JSON.stringify(scoreStore);
-          localStorage.setItem(initials, scoreStoreString);
-          document.getElementById("userInitials").textContent = "Thank you!";
-          x++;
+
+          let scoreboardLi = [scoreli1, scoreli2, scoreli3, scoreli4, scoreli5];
+
+          var x = 0;
+          for (let i = localStorageSorted.length - 1; i >= 0; i--) {
+            scoreboardLi[x].textContent =
+              "Correct: " +
+              localStorageSorted[i].winNum +
+              "  Name: " +
+              localStorageSorted[i].name;
+            x++;
+          }
+
+          var startOver = document.createElement(`button`);
+
+          document.getElementById(`user-scores`).append(startOver);
+
+          startOver.textContent = `Try again?`;
+          startOver.addEventListener(`click`, function () {
+            location = location;
+          });
         }
       });
-  }
-  document.getElementById("showScores").addEventListener("click", function () {
+  } else {
     mainEl.className = "scoreboardView";
-    // Creating li elements in user-scores
+
     var scoreli1 = document.createElement("li");
     document.getElementById("user-scores").appendChild(scoreli1);
     var scoreli2 = document.createElement("li");
@@ -290,11 +367,9 @@ function gameOver() {
     var scoreli5 = document.createElement("li");
     document.getElementById("user-scores").appendChild(scoreli5);
 
-    // Pulling things from storage and making them usable
     let localStorageStrings = [];
     let localStorageParsed = [];
     let localStorageKeyArr = [];
-    let combined = [];
 
     function pullScores() {
       for (let i = 0; i < localStorage.length; i++) {
@@ -306,28 +381,41 @@ function gameOver() {
       }
 
       for (let i = 0; i < localStorageStrings.length; i++) {
-        localStorageParsed.push(JSON.parse(localStorageStrings[i]));
-      }
-
-      for (let i = 0; i < localStorageKeyArr.length; i++) {
-        combined[localStorageKeyArr[i]] = localStorageParsed[i];
+        var thisObj = JSON.parse(localStorageStrings[i]);
+        thisObj.name = localStorageKeyArr[i];
+        localStorageParsed.push(thisObj);
       }
     }
+
     pullScores();
-    console.log(combined);
+    fillScores();
 
-    //     let scoreboardList = {};
-    //  for (const initial in combined) {
-    //      console.log(initial.winNum);
-    //      };
+    function fillScores() {
+      var localStorageSorted = localStorageParsed.sort((a, b) =>
+        a.winNum > b.winNum ? 1 : -1
+      );
 
-    // Filling the scoreboard with SORTED scores...
-    // scoreli1.textContent = scoreboardList[0];
-    // scoreli2.textContent = scoreboardList[1];
-    // scoreli3.textContent = scoreboardList[2];
-    // scoreli4.textContent = scoreboardList[3];
-    // scoreli5.textContent = scoreboardList[4];
+      let scoreboardLi = [scoreli1, scoreli2, scoreli3, scoreli4, scoreli5];
 
-    // localStorage.key() can be fed an index and will return the key name for that index, then can call that item by key and do regular comparisons0
-  });
+      var x = 0;
+      for (let i = localStorageSorted.length - 1; i >= 0; i--) {
+        scoreboardLi[x].textContent =
+          "Correct: " +
+          localStorageSorted[i].winNum +
+          "  Name: " +
+          localStorageSorted[i].name;
+        x++;
+      }
+
+      var startOver = document.createElement(`button`);
+
+      document.getElementById(`user-scores`).append(startOver);
+
+      startOver.textContent = `Try again?`;
+      startOver.addEventListener(`click`, function () {
+        location = location;
+      });
+    }
+    tracker = 0;
+  }
 }
