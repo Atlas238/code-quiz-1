@@ -101,7 +101,7 @@ let questionSix = {
   correctAns: 3,
 };
 
-// Making an array for the questions
+
 var questionArr = [
   questionOne,
 
@@ -117,7 +117,7 @@ var questionArr = [
 ];
 
 var tracker = 0;
-// Listening for click...
+
 button.addEventListener("click", startGame);
 
 button2.addEventListener(`click`, function () {
@@ -128,10 +128,8 @@ button2.addEventListener(`click`, function () {
 var timeRemaining;
 
 function startGame() {
-  // Firt thing, class of main changes to game-start to hide the starter page items and display the question card
   mainEl.className = "game-start";
   questionNumber = 0;
-  // Start timer (1 minute), rounding from miliseconds to seconds for readability, seems slow but pretty sure thats 1 min...
   var time = 6000;
 
   timeRemaining = setInterval(function () {
@@ -150,7 +148,6 @@ function startGame() {
   var lossesCount = document.getElementById("losses");
   lossesCount.textContent = losses;
 
-  // Adding in HTML Elements to fill with question info
   var userChoice1 = document.createElement("div");
   userChoice1.setAttribute("id", "1");
   document.getElementById("responses").appendChild(userChoice1);
@@ -207,7 +204,6 @@ function startGame() {
   labelCheckboxD.setAttribute("for", "choice4");
   document.getElementById("4").appendChild(labelCheckboxD);
 
-  // Fills elements with info from index'd questions
   function fillQuestions() {
     // Fills question h3 based on question number
     document.getElementById("question").textContent =
@@ -299,8 +295,6 @@ function gameOver() {
         var scoreli5 = document.createElement("li");
         document.getElementById("user-scores").appendChild(scoreli5);
 
-        // Pulling things from storage and making them usable
-        // start with empty array, push new user scores into array
         let localStorageStrings = [];
         let localStorageParsed = [];
         let localStorageKeyArr = [];
