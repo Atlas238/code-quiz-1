@@ -1,21 +1,34 @@
 # Code Quiz
 
-## User Story
+## Summary
+This quiz consists of five questions to start, but because of the question structure, can be very easily updated with further questions. Once a user clicks the play now button, the quiz begins and a timer starts counting down. With each correct answer a win is awarded and with an incorrect answer, a bit of time is subtracted from the countdown and a loss is recorded. Once the user completes the quiz, they can log their scores with a set of initials *(maximum characters is currently 5) and view a record (scoreboard) consisting of the top 5 scores ranked by number! In the event that a user runs out of time, the game brings them to the score registration page and allows them the option to begin again. 
 
-- AS A coding boot camp student
-- I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-- SO THAT I can gauge my progress compared to my peers
+Alternatively, a user can select to immediately view the high score screen by clicking a coresponding button on our start page.
 
-## Acceptance Criteria
+## Below...
+- Issues with the application
+- Screenshots of each portion of the application
+- Github links, Repo and Deploy
 
-- GIVEN I am taking a code quiz
-- WHEN I click the start button
-- THEN a timer starts and I am presented with a question
-- WHEN I answer a question
-- THEN I am presented with another question
-- WHEN I answer a question incorrectly
-- THEN time is subtracted from the clock
-- WHEN all questions are answered or the timer reaches 0
-- THEN the game is over
-- WHEN the game is over
-- THEN I can save my initials and my score
+### Issues I ran into:
+
+- Current formating isn't quite how I wanted it, with certain breakpoints completely altering the layout
+
+- Styling the scoreboard was more difficult than expected, would like to change to a table element in future iterations/redo's
+
+### Screenshots
+
+![Quiz Start Page](./Assets/img/start-screen-code-quiz.PNG)
+
+![Quiz Question Card](./Assets/img/quiz-card-code-quiz.PNG)
+
+![User Input](./Assets/img/user-input-code-quiz.PNG)
+
+![Scores](./Assets/img/scores-code-quiz.PNG)
+
+### Links
+
+- Github Deploy:
+
+- Github Repo:
+

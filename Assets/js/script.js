@@ -8,6 +8,8 @@ var button = document.querySelector("#btn");
 
 var button2 = document.querySelector("#btn2");
 
+var mainMenuBtn = document.querySelector("#main-menu");
+
 var rules = document.querySelector("#rule");
 
 var questionNumber = 0;
@@ -124,6 +126,10 @@ button2.addEventListener(`click`, function () {
   tracker++;
   gameOver();
 });
+
+mainMenuBtn.addEventListener(`click`, function(){
+  location = location;
+})
 
 var timeRemaining;
 
@@ -267,14 +273,14 @@ function gameOver() {
             winNum: wins,
             lossesNum: losses,
           };
-          if (initials.length < 0) {
+          if (initials.length < 0 || initials.length > 5) {
             alert(
-              "You must write something for your initials - but you dont have to save your score!"
+              "You must write something for your initials - but you dont have to save your score! (Please no more than 5 characters)"
             );
           } else {
             var scoreStoreString = JSON.stringify(scoreStore);
             localStorage.setItem(initials, scoreStoreString);
-            document.getElementById("userInitials").textContent = "Thank you!";
+            document.getElementById("userInitials").value = "Thank you!";
             x++;
           }
         });
@@ -413,3 +419,4 @@ function gameOver() {
     tracker = 0;
   }
 }
+
