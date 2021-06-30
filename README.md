@@ -28,7 +28,7 @@ Alternatively, a user can select to immediately view the high score screen by cl
 
 ### Links
 
-- Github Deploy:
+- Github Deploy: https://atlas238.github.io/code-quiz-1/
 
-- Github Repo:
+- Github Repo: https://github.com/Atlas238/code-quiz-1
 
